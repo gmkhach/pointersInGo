@@ -27,4 +27,15 @@ func main() {
 	fmt.Println(a)
 	fmt.Printf("the value at b: %v\n", *b)
 
+	// Here is a practical example why you might want to use pointers
+	// The value of x is changed in foo and that change persists after foo is done executing
+	x := 12
+	foo(&x)
+	fmt.Println(x)
+}
+
+func foo (x *int) {
+	fmt.Println(*x)
+	*x = 13
+	fmt.Println(*x)
 }
