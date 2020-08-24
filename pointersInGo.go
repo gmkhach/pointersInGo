@@ -2,6 +2,13 @@ package main
 
 import "fmt"
 
+type car struct {
+	make 	string
+	model	string
+	year	int
+	color	string
+}
+
 func main() {
 	// The pointer is an address in the computer's memory where the value is saved
 	a := 42
@@ -32,10 +39,29 @@ func main() {
 	x := 12
 	foo(&x)
 	fmt.Println(x)
+
+	// When dereferencing a field of a struct that a passed pointer points to we use parenthesis around the struct identifier.
+	// This is to make sure the compier doesn't confuse (*x).field with *(x.field).
+	c := car {
+		make: "Aston Martin",
+		model: "DB5",
+		year: 1963,
+		color: "silver",
+	}
+	fmt.Println(c)
+	changeCar(&c)	
+	fmt.Println(c)
 }
 
 func foo (x *int) {
 	fmt.Println(*x)
 	*x = 13
 	fmt.Println(*x)
+}
+
+func changeCar(c *car) {
+	(*c).make = "Lotus"
+	(*c).model = "Esprit"
+	(*c).year = 1977
+	(*c).color = "white"
 }
